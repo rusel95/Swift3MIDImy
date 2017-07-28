@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		84D051DB1F2B57DD00A1A22F /* GeneralUser GS MuseScore v1.442.sf2 in Resources */ = {isa = PBXBuildFile; fileRef = 84D051DA1F2B57DD00A1A22F /* GeneralUser GS MuseScore v1.442.sf2 */; };
 		B033BB471D4643460020D287 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = B033BB461D4643460020D287 /* Package.swift */; };
 		B05107281D45158F005E88A7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B05107271D45158F005E88A7 /* AppDelegate.swift */; };
 		B051072A1D45158F005E88A7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B05107291D45158F005E88A7 /* ViewController.swift */; };
@@ -18,7 +19,6 @@
 		B051073B1D45158F005E88A7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B05107391D45158F005E88A7 /* LaunchScreen.storyboard */; };
 		B05107461D45158F005E88A7 /* Swift3MIDITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B05107451D45158F005E88A7 /* Swift3MIDITests.swift */; };
 		B05107511D4515AB005E88A7 /* MIDIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B05107501D4515AB005E88A7 /* MIDIManager.swift */; };
-		B05107551D451E90005E88A7 /* FluidR3 GM2-2.SF2 in Resources */ = {isa = PBXBuildFile; fileRef = B05107541D451E90005E88A7 /* FluidR3 GM2-2.SF2 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -32,6 +32,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		84D051DA1F2B57DD00A1A22F /* GeneralUser GS MuseScore v1.442.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "GeneralUser GS MuseScore v1.442.sf2"; sourceTree = "<group>"; };
 		B033BB461D4643460020D287 /* Package.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
 		B05107241D45158F005E88A7 /* Swift3MIDI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Swift3MIDI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B05107271D45158F005E88A7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -48,7 +49,6 @@
 		B05107451D45158F005E88A7 /* Swift3MIDITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Swift3MIDITests.swift; sourceTree = "<group>"; };
 		B05107471D45158F005E88A7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B05107501D4515AB005E88A7 /* MIDIManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MIDIManager.swift; sourceTree = "<group>"; };
-		B05107541D451E90005E88A7 /* FluidR3 GM2-2.SF2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "FluidR3 GM2-2.SF2"; sourceTree = "<group>"; };
 		B08C8BEB1D7856BE000DE73B /* MIDIPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = MIDIPlayground.playground; sourceTree = "<group>"; };
 		B08C8BEC1D787D36000DE73B /* MIDIClassPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = MIDIClassPlayground.playground; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -92,7 +92,7 @@
 		B05107261D45158F005E88A7 /* Swift3MIDI */ = {
 			isa = PBXGroup;
 			children = (
-				B05107541D451E90005E88A7 /* FluidR3 GM2-2.SF2 */,
+				84D051DA1F2B57DD00A1A22F /* GeneralUser GS MuseScore v1.442.sf2 */,
 				B05107501D4515AB005E88A7 /* MIDIManager.swift */,
 				B05107271D45158F005E88A7 /* AppDelegate.swift */,
 				B05107291D45158F005E88A7 /* ViewController.swift */,
@@ -173,12 +173,12 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0800;
-				LastUpgradeCheck = 0800;
+				LastUpgradeCheck = 0830;
 				ORGANIZATIONNAME = "Gene De Lisa";
 				TargetAttributes = {
 					B05107231D45158F005E88A7 = {
 						CreatedOnToolsVersion = 8.0;
-						DevelopmentTeam = 4UDK2944TW;
+						DevelopmentTeam = XL2PB29T62;
 						DevelopmentTeamName = "Gene De Lisa";
 						ProvisioningStyle = Automatic;
 					};
@@ -215,12 +215,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B05107551D451E90005E88A7 /* FluidR3 GM2-2.SF2 in Resources */,
 				B05107331D45158F005E88A7 /* .travis.yml in Resources */,
 				B05107311D45158F005E88A7 /* .gitignore in Resources */,
 				B051072F1D45158F005E88A7 /* LICENSE in Resources */,
 				B051073B1D45158F005E88A7 /* LaunchScreen.storyboard in Resources */,
 				B05107361D45158F005E88A7 /* Main.storyboard in Resources */,
+				84D051DB1F2B57DD00A1A22F /* GeneralUser GS MuseScore v1.442.sf2 in Resources */,
 				B05107381D45158F005E88A7 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -299,8 +299,10 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -347,8 +349,10 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -377,6 +381,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = XL2PB29T62;
 				INFOPLIST_FILE = Swift3MIDI/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.rockhoppertech.Swift3MIDI;
@@ -389,6 +394,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = XL2PB29T62;
 				INFOPLIST_FILE = Swift3MIDI/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.rockhoppertech.Swift3MIDI;

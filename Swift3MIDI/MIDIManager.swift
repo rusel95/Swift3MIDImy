@@ -32,7 +32,7 @@ class MIDIManager : NSObject {
     }
     
     static let midiLog = OSLog(subsystem: "com.rockhoppertech.Swift3MIDI", category: "MIDI")
-
+    
     
     var sequencer:AVAudioSequencer!
     
@@ -66,7 +66,7 @@ class MIDIManager : NSObject {
     func initMIDI(midiNotifier: MIDINotifyBlock? = nil, reader: MIDIReadBlock? = nil) {
         
         os_log("initializing MIDI", log: MIDIManager.midiLog, type: .debug)
-
+        
         
         observeNotifications()
         
@@ -113,7 +113,7 @@ class MIDIManager : NSObject {
             status = MIDIOutputPortCreate(midiClient,
                                           "com.rockhoppertech.OutputPort" as CFString,
                                           &outputPort)
-
+            
             if status == noErr {
                 os_log("created output port %d", log: MIDIManager.midiLog, type: .debug, outputPort)
             } else {
@@ -129,7 +129,7 @@ class MIDIManager : NSObject {
                                                     MIDIPassThru)
             //                                                    readBlock)
             
-             if status == noErr {
+            if status == noErr {
                 os_log("created virtual destination %d", log: MIDIManager.midiLog, type: .debug, virtualDestinationEndpointRef)
             } else {
                 os_log("error creating virtual destination %@", log: MIDIManager.midiLog, type: .error, status)
@@ -141,7 +141,7 @@ class MIDIManager : NSObject {
                                       "Swift3MIDI.VirtualSource" as CFString,
                                       &virtualSourceEndpointRef
             )
-     
+            
             if status == noErr {
                 os_log("created virtual source %d", log: MIDIManager.midiLog, type: .debug, virtualSourceEndpointRef)
             } else {
@@ -235,14 +235,14 @@ class MIDIManager : NSObject {
     // swift 2
     // typealias MIDIReadBlock = (UnsafePointer<MIDIPacketList>, UnsafeMutablePointer<Void>) -> Void
     // swift 3
-    // typealias MIDIReadBlock = (UnsafePointer<MIDIPacketList>, UnsafeMutablePointer<Swift.Void>?) -> Swift.Void
+    // typealias MIDIReadBlock = (UnsafePointer<MIDIPacketList>, UnsafeMutableRawPointer) -> Swift.Void
     
     func MIDIPassThru(_ packetList: UnsafePointer<MIDIPacketList>, srcConnRefCon: UnsafeMutableRawPointer?) -> Swift.Void {
         MIDIReceived(virtualSourceEndpointRef, packetList)
     }
     
     // now in beta 6
-    //    public typealias MIDIReadBlock = (UnsafePointer<MIDIPacketList>, UnsafeMutableRawPointer?) -> Swift.Void
+    //public typealias MIDIReadBlock = (UnsafePointer<MIDIPacketList>, UnsafeMutableRawPointer?) -> Swift.Void
     
     //    func MyMIDIReadBlock(packetList: UnsafePointer<MIDIPacketList>, srcConnRefCon: UnsafeMutablePointer<Swift.Void>?) -> Swift.Void {
     
@@ -492,7 +492,7 @@ class MIDIManager : NSObject {
             let status = MIDIPortConnectSource(inputPort,
                                                midiEndPoint,
                                                nil)
-
+            
             if status == noErr {
                 os_log("yay connected endpoint to inputPort", log: MIDIManager.midiLog, type: .debug)
             } else {
@@ -570,7 +570,7 @@ class MIDIManager : NSObject {
             status = MusicPlayerIsPlaying(player, &playing)
             if playing != false {
                 os_log("music player is playing. stopping", log: MIDIManager.midiLog, type: .debug)
-
+                
                 status = MusicPlayerStop(player)
                 if status != noErr {
                     os_log("error stopping %@", log: MIDIManager.midiLog, type: .error, status)
@@ -589,7 +589,7 @@ class MIDIManager : NSObject {
             }
             
             os_log("starting to play", log: MIDIManager.midiLog, type: .debug)
-
+            
             status = MusicPlayerStart(player)
             if status != noErr {
                 os_log("error starting %@", log: MIDIManager.midiLog, type: .error, status)
@@ -603,9 +603,9 @@ class MIDIManager : NSObject {
         
         let documentsDirectory = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!
         if let fileURL = NSURL(fileURLWithPath: documentsDirectory).appendingPathComponent("\(filename).\(ext)") {
-
+            
             os_log("creating midi file at %@", log: MIDIManager.midiLog, type: .debug, fileURL.absoluteString)
-
+            
             let timeResolution = determineTimeResolution(musicSequence: sequence)
             let status = MusicSequenceFileCreate(sequence, fileURL as CFURL, .midiType, [.eraseFile], Int16(timeResolution))
             if status != noErr {
@@ -771,7 +771,7 @@ class MIDIManager : NSObject {
         return metaEvent
     }
     
-    //FIXME: produces junk. 
+    //FIXME: produces junk.
     // But when inline ( addTrackName(track:name:) ) it's fine because MusicTrackNewMetaEvent copies the text.
     // (data is popped off the stack on return. the fix is to alloc the memory.)
     func createNameEvent(text:String) -> MIDIMetaEvent {
@@ -934,7 +934,7 @@ class MIDIManager : NSObject {
                 status = MusicTrackNewMIDIChannelEvent(track, 0, &chanmess)
                 if status != noErr {
                     os_log("error creating bank select event %@", log: MIDIManager.midiLog, type: .error, status)
-
+                    
                     checkError(status)
                 }
                 
@@ -1122,25 +1122,24 @@ class MIDIManager : NSObject {
     internal func loadSF2Preset(_ preset:UInt8)  {
         
         // this is a huge soundfont, but it is valid. The GeneralUser GS MuseScore font has problems.
-        guard let bankURL = Bundle.main.url(forResource:"FluidR3 GM2-2", withExtension: "SF2") else {
-            fatalError("\"FluidR3 GM2-2.SF2\" file not found.")
+        //        guard let bankURL = Bundle.main.url(forResource:"FluidR3 GM2-2", withExtension: "SF2") else {
+        //            fatalError("\"FluidR3 GM2-2.SF2\" file not found.")
+        //        }
+        
+        
+        //         This is the MuseCore soundfont. Change it to the one you have.
+        guard let bankURL = Bundle.main.url(forResource: "GeneralUser GS MuseScore v1.442", withExtension: "sf2") else {
+            fatalError("\"GeneralUser GS MuseScore v1.442.sf2\" file not found.")
         }
         
-        
-        // This is the MuseCore soundfont. Change it to the one you have.
-        //        guard let bankURL = Bundle.main.urlForResource("GeneralUser GS MuseScore v1.442", withExtension: "sf2") else {
-        ////            fatalError("\"GeneralUser GS MuseScore v1.442.sf2\" file not found.")
-        //            print("\"GeneralUser GS MuseScore v1.442.sf2\" file not found.")
-        //        }
-
         // or
         // instrumentType: UInt8(kInstrumentType_DLSPreset),
         
         var instdata = AUSamplerInstrumentData(fileURL: Unmanaged.passUnretained(bankURL as CFURL),
-            instrumentType: UInt8(kInstrumentType_SF2Preset),
-            bankMSB: UInt8(kAUSampler_DefaultMelodicBankMSB),
-            bankLSB: UInt8(kAUSampler_DefaultBankLSB),
-            presetID: preset)
+                                               instrumentType: UInt8(kInstrumentType_SF2Preset),
+                                               bankMSB: UInt8(kAUSampler_DefaultMelodicBankMSB),
+                                               bankLSB: UInt8(kAUSampler_DefaultBankLSB),
+                                               presetID: preset)
         
         if let sampler = self.samplerUnit {
             let status = AudioUnitSetProperty(
@@ -1169,7 +1168,7 @@ class MIDIManager : NSObject {
         let status = MIDIObjectSetIntegerProperty(endpoint, kMIDIPropertyUniqueID, id)
         if status != noErr {
             os_log("error setting unique id. status %@", log: MIDIManager.midiLog, type: .error, status)
-
+            
             checkError(status)
         }
         return status
@@ -1194,7 +1193,7 @@ class MIDIManager : NSObject {
         
         let n = MIDIGetNumberOfExternalDevices()
         os_log("external devices %d", log: MIDIManager.midiLog, type: .debug, n)
-
+        
         for i in 0 ..< n {
             let midiDevice = MIDIGetExternalDevice(i)
             printProperties(midiDevice)
@@ -1205,7 +1204,7 @@ class MIDIManager : NSObject {
         
         let n = MIDIGetNumberOfDevices()
         os_log("number of devices %d", log: MIDIManager.midiLog, type: .debug, n)
-
+        
         for i in 0 ..< n {
             let midiDevice = MIDIGetDevice(i)
             printProperties(midiDevice)
@@ -1215,7 +1214,7 @@ class MIDIManager : NSObject {
     func allDestinationProps() {
         let numberOfDestinations  = MIDIGetNumberOfDestinations()
         os_log("destinations %d", log: MIDIManager.midiLog, type: .debug, numberOfDestinations)
-
+        
         for i in 0 ..< numberOfDestinations {
             let endpoint = MIDIGetDestination(i)
             printProperties(endpoint)
@@ -1225,7 +1224,7 @@ class MIDIManager : NSObject {
     func allSourceProps() {
         let numberOfSources  = MIDIGetNumberOfSources()
         os_log("numberOfSources %d", log: MIDIManager.midiLog, type: .debug, numberOfSources)
-
+        
         for i in 0 ..< numberOfSources {
             let endpoint = MIDIGetSource(i)
             printProperties(endpoint)
@@ -1245,7 +1244,7 @@ class MIDIManager : NSObject {
                     // what a mess. and the public doesn't really help here.
                     os_log("key %{public}@ value %{public}@", log: MIDIManager.midiLog, type: .debug, key, value as! CVarArg)
                 }
-
+                
             }
         } else {
             os_log("Couldn't load properties for %@", log: MIDIManager.midiLog, type: .error, midiobject)
@@ -1290,170 +1289,170 @@ class MIDIManager : NSObject {
             
         case kMIDIInvalidPort :
             os_log("kMIDIInvalidPort", log: MIDIManager.midiLog, type: .error)
-
+            
         case kMIDIWrongEndpointType :
             os_log("kMIDIWrongEndpointType", log: MIDIManager.midiLog, type: .error)
-
+            
         case kMIDINoConnection :
             os_log("kMIDINoConnection", log: MIDIManager.midiLog, type: .error)
-
+            
         case kMIDIUnknownEndpoint :
             os_log("kMIDIUnknownEndpoint", log: MIDIManager.midiLog, type: .error)
-
+            
         case kMIDIUnknownProperty :
             os_log("kMIDIUnknownProperty", log: MIDIManager.midiLog, type: .error)
-
+            
         case kMIDIWrongPropertyType :
             os_log("kMIDIWrongPropertyType", log: MIDIManager.midiLog, type: .error)
-
+            
         case kMIDINoCurrentSetup :
             os_log("kMIDINoCurrentSetup", log: MIDIManager.midiLog, type: .error)
-
+            
         case kMIDIMessageSendErr :
             os_log("kMIDIMessageSendErr", log: MIDIManager.midiLog, type: .error)
-
+            
         case kMIDIServerStartErr :
             os_log("kMIDIServerStartErr", log: MIDIManager.midiLog, type: .error)
-
+            
         case kMIDISetupFormatErr :
             os_log("kMIDISetupFormatErr", log: MIDIManager.midiLog, type: .error)
-
+            
         case kMIDIWrongThread :
             os_log("kMIDIWrongThread", log: MIDIManager.midiLog, type: .error)
-
+            
         case kMIDIObjectNotFound :
             os_log("kMIDIObjectNotFound", log: MIDIManager.midiLog, type: .error)
-
+            
         case kMIDIIDNotUnique :
             os_log("kMIDIIDNotUnique", log: MIDIManager.midiLog, type: .error)
-
+            
         case kMIDINotPermitted :
             os_log("kMIDINotPermitted", log: MIDIManager.midiLog, type: .error)
             os_log("did you set UIBackgroundModes to audio in your info.plist?", log: MIDIManager.midiLog, type: .error)
-
+            
         //AUGraph.h
         case kAUGraphErr_NodeNotFound:
             os_log("kAUGraphErr_NodeNotFound", log: MIDIManager.midiLog, type: .error)
-
+            
         case kAUGraphErr_OutputNodeErr:
             os_log("kAUGraphErr_OutputNodeErr", log: MIDIManager.midiLog, type: .error)
-
+            
         case kAUGraphErr_InvalidConnection:
             os_log("kAUGraphErr_InvalidConnection", log: MIDIManager.midiLog, type: .error)
-
+            
         case kAUGraphErr_CannotDoInCurrentContext:
             os_log("kAUGraphErr_CannotDoInCurrentContext", log: MIDIManager.midiLog, type: .error)
-
+            
         case kAUGraphErr_InvalidAudioUnit:
             os_log("kAUGraphErr_InvalidAudioUnit", log: MIDIManager.midiLog, type: .error)
-
+            
             // core audio
             
         case kAudio_UnimplementedError:
             os_log("kAudio_UnimplementedError", log: MIDIManager.midiLog, type: .error)
-
+            
         case kAudio_FileNotFoundError:
             os_log("kAudio_FileNotFoundError", log: MIDIManager.midiLog, type: .error)
-
+            
         case kAudio_FilePermissionError:
             os_log("kAudio_FilePermissionError", log: MIDIManager.midiLog, type: .error)
-
+            
         case kAudio_TooManyFilesOpenError:
             os_log("kAudio_TooManyFilesOpenError", log: MIDIManager.midiLog, type: .error)
-
+            
         case kAudio_BadFilePathError:
             os_log("kAudio_BadFilePathError", log: MIDIManager.midiLog, type: .error)
-
+            
         case kAudio_ParamError:
             os_log("kAudio_ParamError", log: MIDIManager.midiLog, type: .error)
-
+            
         case kAudio_MemFullError:
             os_log("kAudio_MemFullError", log: MIDIManager.midiLog, type: .error)
-
+            
             
             
             // AudioToolbox
             
         case kAudioToolboxErr_InvalidSequenceType :
             os_log("kAudioToolboxErr_InvalidSequenceType", log: MIDIManager.midiLog, type: .error)
-
+            
         case kAudioToolboxErr_TrackIndexError :
             os_log("kAudioToolboxErr_TrackIndexError", log: MIDIManager.midiLog, type: .error)
-
+            
         case kAudioToolboxErr_TrackNotFound :
             os_log("kAudioToolboxErr_TrackNotFound", log: MIDIManager.midiLog, type: .error)
-
+            
         case kAudioToolboxErr_EndOfTrack :
             os_log("kAudioToolboxErr_EndOfTrack", log: MIDIManager.midiLog, type: .error)
-
+            
         case kAudioToolboxErr_StartOfTrack :
             os_log("kAudioToolboxErr_StartOfTrack", log: MIDIManager.midiLog, type: .error)
-
+            
         case kAudioToolboxErr_IllegalTrackDestination :
             os_log("kAudioToolboxErr_IllegalTrackDestination", log: MIDIManager.midiLog, type: .error)
-
+            
         case kAudioToolboxErr_NoSequence :
             os_log("kAudioToolboxErr_NoSequence", log: MIDIManager.midiLog, type: .error)
-
+            
         case kAudioToolboxErr_InvalidEventType :
             os_log("kAudioToolboxErr_InvalidEventType", log: MIDIManager.midiLog, type: .error)
-
+            
         case kAudioToolboxErr_InvalidPlayerState :
             os_log("kAudioToolboxErr_InvalidPlayerState", log: MIDIManager.midiLog, type: .error)
-
+            
             // AudioUnit
             
         case kAudioUnitErr_InvalidProperty :
             os_log("kAudioUnitErr_InvalidProperty", log: MIDIManager.midiLog, type: .error)
-
+            
         case kAudioUnitErr_InvalidParameter :
             os_log("kAudioUnitErr_InvalidParameter", log: MIDIManager.midiLog, type: .error)
-
+            
         case kAudioUnitErr_InvalidElement :
             os_log("kAudioUnitErr_InvalidElement", log: MIDIManager.midiLog, type: .error)
-
+            
         case kAudioUnitErr_NoConnection :
             os_log("kAudioUnitErr_NoConnection", log: MIDIManager.midiLog, type: .error)
-
+            
         case kAudioUnitErr_FailedInitialization :
             os_log("kAudioUnitErr_FailedInitialization", log: MIDIManager.midiLog, type: .error)
-
+            
         case kAudioUnitErr_TooManyFramesToProcess :
             os_log("kAudioUnitErr_TooManyFramesToProcess", log: MIDIManager.midiLog, type: .error)
-
+            
         case kAudioUnitErr_InvalidFile :
             os_log("kAudioUnitErr_InvalidFile", log: MIDIManager.midiLog, type: .error)
-
+            
         case kAudioUnitErr_FormatNotSupported :
             os_log("kAudioUnitErr_FormatNotSupported", log: MIDIManager.midiLog, type: .error)
-
+            
         case kAudioUnitErr_Uninitialized :
             os_log("kAudioUnitErr_Uninitialized", log: MIDIManager.midiLog, type: .error)
-
+            
         case kAudioUnitErr_InvalidScope :
             os_log("kAudioUnitErr_InvalidScope", log: MIDIManager.midiLog, type: .error)
-
+            
         case kAudioUnitErr_PropertyNotWritable :
             os_log("kAudioUnitErr_PropertyNotWritable", log: MIDIManager.midiLog, type: .error)
-
+            
         case kAudioUnitErr_InvalidPropertyValue :
             os_log("kAudioUnitErr_InvalidPropertyValue", log: MIDIManager.midiLog, type: .error)
-
+            
         case kAudioUnitErr_PropertyNotInUse :
             os_log("kAudioUnitErr_PropertyNotInUse", log: MIDIManager.midiLog, type: .error)
-
+            
         case kAudioUnitErr_Initialized :
             os_log("kAudioUnitErr_Initialized", log: MIDIManager.midiLog, type: .error)
-
+            
         case kAudioUnitErr_InvalidOfflineRender :
             os_log("kAudioUnitErr_InvalidOfflineRender", log: MIDIManager.midiLog, type: .error)
-
+            
         case kAudioUnitErr_Unauthorized :
             os_log("kAudioUnitErr_Unauthorized", log: MIDIManager.midiLog, type: .error)
-
+            
         default:
             os_log("huh?", log: MIDIManager.midiLog, type: .error)
-
+            
         }
     }
     
