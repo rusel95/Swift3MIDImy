@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		84D051DB1F2B57DD00A1A22F /* GeneralUser GS MuseScore v1.442.sf2 in Resources */ = {isa = PBXBuildFile; fileRef = 84D051DA1F2B57DD00A1A22F /* GeneralUser GS MuseScore v1.442.sf2 */; };
-		B033BB471D4643460020D287 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = B033BB461D4643460020D287 /* Package.swift */; };
 		B05107281D45158F005E88A7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B05107271D45158F005E88A7 /* AppDelegate.swift */; };
 		B051072A1D45158F005E88A7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B05107291D45158F005E88A7 /* ViewController.swift */; };
 		B051072F1D45158F005E88A7 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = B051072E1D45158F005E88A7 /* LICENSE */; };
@@ -33,7 +32,6 @@
 
 /* Begin PBXFileReference section */
 		84D051DA1F2B57DD00A1A22F /* GeneralUser GS MuseScore v1.442.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "GeneralUser GS MuseScore v1.442.sf2"; sourceTree = "<group>"; };
-		B033BB461D4643460020D287 /* Package.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
 		B05107241D45158F005E88A7 /* Swift3MIDI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Swift3MIDI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B05107271D45158F005E88A7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B05107291D45158F005E88A7 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -101,7 +99,6 @@
 				B05107391D45158F005E88A7 /* LaunchScreen.storyboard */,
 				B051073C1D45158F005E88A7 /* Info.plist */,
 				B051072B1D45158F005E88A7 /* Supporting Files */,
-				B033BB461D4643460020D287 /* Package.swift */,
 				B08C8BEB1D7856BE000DE73B /* MIDIPlayground.playground */,
 				B08C8BEC1D787D36000DE73B /* MIDIClassPlayground.playground */,
 			);
@@ -239,7 +236,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B033BB471D4643460020D287 /* Package.swift in Sources */,
 				B051072A1D45158F005E88A7 /* ViewController.swift in Sources */,
 				B05107511D4515AB005E88A7 /* MIDIManager.swift in Sources */,
 				B05107281D45158F005E88A7 /* AppDelegate.swift in Sources */,
